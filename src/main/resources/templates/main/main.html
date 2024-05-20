@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+</head>
+<body>
+    <div>
+        <h1>main page</h1>
+        <span sec:authentication="name"></span><span>님</span>
+    </div>
+    <div></div>
+        <a href="/logout">
+        <button type="button" id="logoutButton">로그아웃</button></a>
+</body>
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        if (confirm('로그아웃 하시겠습니까?')) {
+            window.location.href = '/logout';
+        }
+    });
+</script>
+</html>

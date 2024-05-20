@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<h1>Sign Up Page</h1>
+<form id="signupForm">
+    <label for="name">name:</label>
+    <input type="text" id="name" name="name"><br>
+    <label for="userId">id:</label>
+    <input type="text" id="userId" name="userId"><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br>
+    <label for="email">email:</label>
+    <input type="text" id="email" name="email"><br>
+    <label for="address">address:</label>
+    <input type="text" id="address" name="address"><br>
+    <button type="button" id="signupButton">Sign Up</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // 버튼 클릭 이벤트 리스너 추가
+        $('#signupButton').click(function() {
+            let name = $('#name').val();
+            let userId = $('#userId').val();
+            let password = $('#password').val();
+            let email = $('#email').val();
+            let address = $('#address').val();
+            signup(name, userId, password, email, address);
+        });
+    });
+
+    function signup(name, userId, password, email, address) {
+        let obj = {
+            name: name,
+            userId: userId,
+            password: password,
+            email: email,
+            address: address
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/signup', // 회원가입 처리 URL로 수정
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(obj),
+            success: function(response) {
+                alert(response.message);
+                window.location.pathname = '/login';
+            },
+            error: function(xhr, status, error) {
+                alert('Sign up failed: ' + xhr.responseText);
+                console.log('Error:', error);
+            }
+            // error: function(xhr, status, error) {
+            //     console.error('Signup failed:', error);
+            // }
+        });
+    }
+</script>
+</body>
+</html>
